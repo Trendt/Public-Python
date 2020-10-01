@@ -6,41 +6,31 @@ def refresh_board(game_board:list):
 def check_for_win(gb:list):
     gb = [None if x == " " else x for x in gb]
     gb_rows = [[gb[0],gb[1],gb[2]],
-                [gb[3],gb[4],gb[5]],
-                [gb[6],gb[7],gb[8]]]
+               [gb[3],gb[4],gb[5]],
+               [gb[6],gb[7],gb[8]]]
                
     gb_columns = [[gb[0],gb[3],gb[6]],
-                   [gb[1],gb[4],gb[7]],
-                   [gb[2],gb[5],gb[8]]]
+                  [gb[1],gb[4],gb[7]],
+                  [gb[2],gb[5],gb[8]]]
     
     gb_diagonals = [[gb[0],gb[4],gb[8]],
                     [gb[2],gb[4],gb[6]]]
     
-    gb_diagonals_new = []
-    for x in gb_diagonals:
-        gb_diagonals_new.append(list(set(x)))
-        
-    gb_columns_new = []
-    for x in gb_columns:
-        gb_diagonals_new.append(list(set(x)))
-        
-    gb_rows_new = []
-    for x in gb_rows:
-        gb_rows_new.append(list(set(x)))
-        
-    for i in gb_columns_new:
+    gb_diagonals = [list(set(x)) for x in gb_diagonals]
+    gb_columns = [list(set(x)) for x in gb_columns]
+    gb_rows = [list(set(x)) for x in gb_rows]
+    
+    for i in gb_columns:
         if len(i) == 1 and i[0] != None:
             return i[0]
         
-    for j in gb_rows_new:
+    for j in gb_rows:
         if len(j) == 1 and j[0] != None:
             return j[0]
         
-    for z in gb_diagonals_new:
+    for z in gb_diagonals:
         if len(z) == 1 and z != None:
             return z[0]
-        
-    return None
     
 def game_loop():
     game_running = True
